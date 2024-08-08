@@ -35,9 +35,10 @@ class _LoginScreenState extends State<LogInScreen>{
         height: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
+          physics: progressIndex > 0 ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
-              const SizedBox(height: 28,),
+              const SizedBox(height: 50,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

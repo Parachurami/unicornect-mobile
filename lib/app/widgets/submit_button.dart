@@ -8,7 +8,7 @@ class SubmitButton extends StatelessWidget{
   final double? width;
   final double? horizontalPadding;
   final double? verticalPadding;
-  final void Function() onPressed;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -22,7 +22,7 @@ class SubmitButton extends StatelessWidget{
                 )
             ),
             padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 91, vertical: verticalPadding ?? 20)),
-            backgroundColor: WidgetStatePropertyAll(backgroundColor),
+            backgroundColor:onPressed == null ? WidgetStatePropertyAll(Colors.black.withOpacity(0.5)) : WidgetStatePropertyAll(backgroundColor),
           ),
           onPressed: onPressed,
           child: Text(title,

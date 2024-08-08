@@ -65,7 +65,7 @@ class _FirstPageState extends ConsumerState<FirstPage> with TickerProviderStateM
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 320,
+            height: 360,
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             // width: double.infinity,

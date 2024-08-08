@@ -56,7 +56,9 @@ class _InputFieldState extends State<InputField> {
         if(widget.autoValidate ?? false){
           widget.formKey!.currentState!.validate();
         }
-        widget.onChange!(text);
+        if(widget.onChange != null) {
+          widget.onChange!(text);
+        }
       },
       onSaved: widget.onSaved,
       keyboardType: widget.inputType,

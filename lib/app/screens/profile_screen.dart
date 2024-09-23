@@ -362,9 +362,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     title: const Text('Contact Support'),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: (){
-                      if(_controller.hasClients){
-                        _controller.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
-                      }
+                      _tweakNavigation(Tweak.contact);
                     },
                   ),
                   ListTile(

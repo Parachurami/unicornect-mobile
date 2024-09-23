@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unicornect/app/helper/helper.dart';
 import 'package:unicornect/app/screens/profile_screen.dart';
+import 'package:unicornect/app/widgets/tweak/contact_support.dart';
 import 'package:unicornect/app/widgets/tweak/following.dart';
 import 'package:unicornect/app/widgets/tweak/font.dart';
 import 'package:unicornect/app/widgets/tweak/language.dart';
@@ -104,7 +105,30 @@ class TweakScreen extends StatelessWidget{
         break;
       case Tweak.contact:
         // TODO: Handle this case.
-        title = 'Contact Us';
+        title = 'Contact Support';
+        content = const ContactSupport();
+        navInfo = Row(
+          children: [
+            Image.asset(
+              'assets/images/profile_icon_fill.png',
+              color: Helper.hexToColor('#7C7C80'),
+              width: 18,
+            ),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+            const Text('Contact Support'),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+          ],
+        );
         break;
       case Tweak.faq:
         // TODO: Handle this case.

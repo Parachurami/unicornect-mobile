@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unicornect/app/screens/log_in_screen.dart';
+import 'package:unicornect/app/helper/helper.dart';
+import 'package:unicornect/app/screens/forgot_screen.dart';
+import 'package:unicornect/app/screens/sign_up_screen.dart';
+import 'package:unicornect/app/widgets/global/bottom_navigation.dart';
 import 'package:unicornect/app/widgets/input_field.dart';
 import 'package:unicornect/app/widgets/submit_button.dart';
 
@@ -23,12 +26,14 @@ class _HomeScreenState extends State<SignInScreen>{
     buffer.write(hexString.replaceFirst('#', ''));
     return Color(int.parse(buffer.toString(), radix: 16));
   }
-  @override
-
-
   void _signIn(){
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+            builder: (ctx) => const BottomNavigation()
+        )
+      );
       return;
     }
   }
@@ -94,9 +99,10 @@ class _HomeScreenState extends State<SignInScreen>{
                       // focusNode: _focusNode1,
                       label: "Email or Username",
                       validator: (text){
-                        if(text!.trim().isEmpty || text == null){
+                        if(text!.trim().isEmpty || (!Helper.validName(text) && !Helper.validEmail(text))){
                           return "Invalid Email or Username";
                         }
+                        return null;
                       }, inputType: TextInputType.text),
                   const SizedBox(height: 45,),
                   InputField(
@@ -104,9 +110,10 @@ class _HomeScreenState extends State<SignInScreen>{
                       // focusNode: _focusNode2,
                       label: "Password",
                       validator: (text){
-                        if(text!.trim().isEmpty || text == null){
+                        if(text!.trim().isEmpty){
                           return "Invalid Password";
                         }
+                        return null;
                       },
                       inputType: TextInputType.visiblePassword
                   ),
@@ -115,7 +122,13 @@ class _HomeScreenState extends State<SignInScreen>{
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (ctx) => const ForgotScreen()
+                              )
+                            );
+                          },
                           child: Text("Forgot Password?",
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w500,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicornect/app/models/User.dart';
-import 'package:unicornect/app/widgets/login/first_content.dart';
-import 'package:unicornect/app/widgets/login/second_content.dart';
-import 'package:unicornect/app/widgets/login/third_content.dart';
+import 'package:unicornect/app/widgets/login/login_input.dart';
+import 'package:unicornect/app/widgets/login/verifier.dart';
+import 'package:unicornect/app/widgets/login/terms_and_conditions.dart';
 
 class ContentContainer extends StatefulWidget{
   const ContentContainer({super.key, required this.pageController});
@@ -21,7 +21,7 @@ class _ContentContainerState extends State<ContentContainer>{
   void createUser(User user){
     setState(() {
       _currentUser = user;
-      secondWidget = SecondContent(currentUser: _currentUser, pageController: widget.pageController,);
+      secondWidget = Verifier(currentUser: _currentUser, pageController: widget.pageController,);
     });
   }
 

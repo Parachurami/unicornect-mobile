@@ -27,7 +27,7 @@ class _InputFieldState extends State<InputField> {
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
-  bool _obscureText = false;
+  bool _obscureText = true;
 
 
   @override
@@ -62,7 +62,7 @@ class _InputFieldState extends State<InputField> {
       },
       onSaved: widget.onSaved,
       keyboardType: widget.inputType,
-      obscureText: _obscureText,
+      obscureText:widget.inputType == TextInputType.visiblePassword ? _obscureText : false,
       obscuringCharacter: "*",
       cursorColor: _hexToColor("#7C7C80"),
       cursorWidth: 1,

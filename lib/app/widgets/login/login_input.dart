@@ -44,7 +44,8 @@ class _FirstContentState extends State<FirstContent>{
             lastName: lastName,
             username: username,
             email: email,
-            password: password
+            password: password,
+            profileImage:'assets/images/user_image_1.png'
         )
       );
     }

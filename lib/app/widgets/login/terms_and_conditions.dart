@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:unicornect/app/helper/helper.dart';
 import 'package:unicornect/app/screens/sign_in_screen.dart';
+import 'package:unicornect/app/widgets/global/bottom_navigation.dart';
 import 'package:unicornect/app/widgets/submit_button.dart';
 
 class ThirdContent extends StatefulWidget{
@@ -117,7 +118,9 @@ class _ThirdContentState extends State<ThirdContent> {
             title: 'Agree and Proceed',
             backgroundColor: Colors.black,
             onPressed:checkValue! ? (){
-
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (ctx) => const BottomNavigation())
+              );
             } : null
         ),
         SizedBox(height: deviceHeigth * 0.04,),

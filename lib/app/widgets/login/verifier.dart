@@ -7,18 +7,20 @@ import 'package:unicornect/app/models/User.dart';
 import 'package:unicornect/app/widgets/input_field.dart';
 import 'package:unicornect/app/widgets/submit_button.dart';
 
-class SecondContent extends StatefulWidget{
-  const SecondContent({super.key, required this.currentUser, required this.pageController});
-  final User currentUser;
+class Verifier extends StatefulWidget{
+  const Verifier({super.key, this.currentUser, required this.pageController, this.onVerify, this.userEmail});
+  final User? currentUser;
   final PageController pageController;
+  final String? userEmail;
+  final void Function(String)? onVerify;
 
   @override
-  State<SecondContent> createState() {
-    return _SecondContentState();
+  State<Verifier> createState() {
+    return _VerifierState();
   }
 }
 
-class _SecondContentState extends State<SecondContent>{
+class _VerifierState extends State<Verifier>{
   final FocusNode _focusNode1 = FocusNode();
   final FocusNode _focusNode2 = FocusNode();
   final FocusNode _focusNode3 = FocusNode();
@@ -130,7 +132,7 @@ class _SecondContentState extends State<SecondContent>{
                 ),
                 const SizedBox(height: 20,),
                 Text(
-                  widget.currentUser.email,
+                  widget.currentUser!.email!,
                   style: GoogleFonts.montserrat(
                     fontSize: 16,
                     fontWeight: FontWeight.w500
@@ -168,7 +170,7 @@ class _SecondContentState extends State<SecondContent>{
         Row(
           children: [
             Text(
-              "Email Verification",
+              widget.onVerify != null ? "OTP Verification" : "Email Verification",
               style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w600,
                   fontSize: 20
@@ -179,7 +181,7 @@ class _SecondContentState extends State<SecondContent>{
         ),
         const SizedBox(height: 14,),
         Text(
-          "We’ve just sent a 4-digit code to ${widget.currentUser.email}, please enter it below",
+          "We’ve just sent a 4-digit code to ${widget.userEmail ?? widget.currentUser?.email}, please enter it below",
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.w400,
             fontSize: 14,
@@ -275,7 +277,20 @@ class _SecondContentState extends State<SecondContent>{
         SubmitButton(
             title: 'Verify Email',
             backgroundColor: Colors.black,
-            onPressed:_enteredCode.length == 4 ? _showSuccessMessage: null
+            // onPressed:_enteredCode.length == 4 ? _showSuccessMessage: null
+            onPressed:_enteredCode.length == 4 ? (){
+              if(widget.onVerify != null){
+                widget.onVerify!(widget.userEmail!);
+              }else{
+                _showSuccessMessage();
+              }
+            }:null
+              // _enteredCode.length == 4 ? widget.onVerify != null ? widget.onVerify!(widget.userEmail!) :
+              //   _showSuccessMessage
+              // : (){
+              //   widget.onVerify!(widget.userEmail!)
+              // }
+
         ),
         const SizedBox(height: 24,),
         Row(

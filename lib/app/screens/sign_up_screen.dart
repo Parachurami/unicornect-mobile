@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LogInScreen>{
         height: double.infinity,
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
-          physics: progressIndex > 0 ? const NeverScrollableScrollPhysics() : null,
+          physics: progressIndex > 1 ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               const SizedBox(height: 50,),
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LogInScreen>{
               ProgressBar( index: progressIndex,),
               const SizedBox(height: 24,),
               SizedBox(
-                  height: heigth + 60,
+                  height: heigth + 62.6  ,
                   child: ContentContainer(
                     pageController: _pageController,
                   )

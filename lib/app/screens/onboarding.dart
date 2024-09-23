@@ -22,9 +22,24 @@ class _OnboardingState extends ConsumerState<Onboarding>{
     _pageController.dispose();
     super.dispose();
   }
+
+  void _loadData() async{
+    await Future.delayed(
+        const Duration(milliseconds: 1),
+      () {
+        ref.read(newUserProvider.notifier).loadData();
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loadData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    ref.watch(newUserProvider.notifier).loadData();
     bool newUser = ref.watch(newUserProvider) as bool;
     // TODO: implement build
     return Scaffold(

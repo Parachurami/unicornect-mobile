@@ -44,6 +44,11 @@ dependencies:
   flutter_native_splash: ^2.4.0
   crypto: ^3.0.3
   encrypt: ^5.0.3
+  toast: ^0.3.0
+  toastification: ^2.1.0
+  intl: ^0.19.0
+  uuid: ^4.4.2
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +81,33 @@ flutter:
     - assets/images/eyeOff.png
     - assets/images/image4.png
     - assets/images/image6.png
+    - assets/images/home_icon_fill.png
+    - assets/images/home_icon_outline.png
+    - assets/images/profile_icon_fill.png
+    - assets/images/profile_icon_outline.png
+    - assets/images/search_icon_fill.png
+    - assets/images/search_icon_outline.png
+    - assets/images/ticket_icon_fill.png
+    - assets/images/ticket_icon_outline.png
+    - assets/images/notification_icon.png
+    - assets/images/filter_icon.png
+    - assets/images/home_arrow.png
+    - assets/images/home_calendar.png
+    - assets/images/event_image_1.png
+    - assets/images/event_image_2.png
+    - assets/images/event_image_3.png
+    - assets/images/user_image_1.png
+    - assets/images/user_image_2.png
+    - assets/images/user_image_3.png
+    - assets/images/organizer_image_1.png
+    - assets/images/profile_image.png
+    - assets/images/details_icon.png
+    - assets/images/logout_icon.png
+    - assets/images/settings_icon.png
+    - assets/images/support_icon.png
+    - assets/images/organiser_image_2.png
+    - assets/images/organiser_image_3.png
+    - assets/images/organiser_image_4.png
 
 flutter_native_splash:
   color: "#000000"

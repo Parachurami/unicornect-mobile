@@ -202,7 +202,9 @@ class _VerifierState extends State<Verifier>{
                   inputFocusNode: _focusNode1,
                   maxLength: 1,
                   label: '',
-                  validator: (String? text) {  },
+                  validator: (String? text) {
+                    return null;
+                    },
                   inputType: TextInputType.number,
                 )
             ),
@@ -213,14 +215,16 @@ class _VerifierState extends State<Verifier>{
                   onChange: (text){
                     if(text!.isNotEmpty){
                       _focusNode3.requestFocus();
-                    }else if(text!.isEmpty){
+                    }else if(text.isEmpty){
                       _focusNode1.requestFocus();
                     }
                   },
                   inputFocusNode: _focusNode2,
                   maxLength: 1,
                   label: '',
-                  validator: (String? text) {  },
+                  validator: (String? text) {
+                    return null;
+                    },
                   inputType: TextInputType.number,
                 )
             ),
@@ -231,14 +235,16 @@ class _VerifierState extends State<Verifier>{
                   onChange: (text){
                     if(text!.isNotEmpty){
                       _focusNode5.requestFocus();
-                    }else if(text!.isEmpty){
+                    }else if(text.isEmpty){
                       _focusNode2.requestFocus();
                     }
                   },
                   inputFocusNode: _focusNode3,
                   maxLength: 1,
                   label: '',
-                  validator: (String? text) {  },
+                  validator: (String? text) {
+                    return null;
+                    },
                   inputType: TextInputType.number,
                 )
             ),
@@ -254,7 +260,9 @@ class _VerifierState extends State<Verifier>{
                   inputFocusNode: _focusNode5,
                   maxLength: 1,
                   label: '',
-                  validator: (String? text) {  },
+                  validator: (String? text) {
+                    return null;
+                    },
                   inputType: TextInputType.number,
                 )
             ),

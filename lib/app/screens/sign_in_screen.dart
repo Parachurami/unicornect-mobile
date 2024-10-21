@@ -29,6 +29,7 @@ class _HomeScreenState extends State<SignInScreen>{
   void _signIn(){
     if(_formKey.currentState!.validate()){
       _formKey.currentState!.save();
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
             builder: (ctx) => const BottomNavigation()

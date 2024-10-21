@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:unicornect/app/helper/helper.dart';
 
 class SubmitButton extends StatelessWidget{
   const SubmitButton({super.key, required this.title, required this.backgroundColor, this.width, this.horizontalPadding, this.verticalPadding, required this.onPressed});
@@ -18,7 +19,10 @@ class SubmitButton extends StatelessWidget{
           style: ButtonStyle(
             shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)
+                  borderRadius: BorderRadius.circular(12),
+                  side: const BorderSide(
+                    color: Colors.black
+                  )
                 )
             ),
             padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: horizontalPadding ?? 91, vertical: verticalPadding ?? 20)),
@@ -27,7 +31,7 @@ class SubmitButton extends StatelessWidget{
           onPressed: onPressed,
           child: Text(title,
             style: GoogleFonts.montserrat(
-                color: Colors.white,
+                color: (backgroundColor == Colors.transparent || backgroundColor == Helper.hexToColor('#EFF7FF')) ? Colors.black :Colors.white,
                 fontSize: 16
             ),
           )

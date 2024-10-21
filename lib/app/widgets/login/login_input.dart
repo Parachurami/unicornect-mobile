@@ -88,6 +88,7 @@ class _FirstContentState extends State<FirstContent>{
                     child: InputField(
                         onSaved: (text) {
                           firstName = text!;
+                          return null;
                         },
                         placeholder: "e.g John",
                         autoValidate: _autoValidate,
@@ -95,9 +96,10 @@ class _FirstContentState extends State<FirstContent>{
                         validator: (text){
                           if(text!.isEmpty){
                             return "Required field";
-                          }else if(!nameRegExp.hasMatch(text!)){
+                          }else if(!nameRegExp.hasMatch(text)){
                             return "Invalid First Name";
                           }
+                          return null;
                         },
                         inputType: TextInputType.text,
                         formKey: _formKey
@@ -108,6 +110,7 @@ class _FirstContentState extends State<FirstContent>{
                     child: InputField(
                         onSaved: (text){
                           lastName = text!;
+                          return null;
                         },
                         placeholder: "e.g Doe",
                         autoValidate: _autoValidate,
@@ -115,9 +118,10 @@ class _FirstContentState extends State<FirstContent>{
                         validator: (text){
                           if(text!.isEmpty){
                             return "Required field";
-                          }else if(!nameRegExp.hasMatch(text!)){
+                          }else if(!nameRegExp.hasMatch(text)){
                             return "Invalid Last Name";
                           }
+                          return null;
                         },
                         inputType: TextInputType.text,
                         formKey: _formKey
@@ -129,6 +133,7 @@ class _FirstContentState extends State<FirstContent>{
               InputField(
                   onSaved: (text){
                     username = text!;
+                    return null;
                   },
                   autoValidate: _autoValidate,
                   label: "Username",
@@ -136,6 +141,7 @@ class _FirstContentState extends State<FirstContent>{
                     if(text!.isEmpty){
                       return "Required field";
                     }
+                    return null;
                   },
                   inputType: TextInputType.text,
                   formKey: _formKey
@@ -144,6 +150,7 @@ class _FirstContentState extends State<FirstContent>{
               InputField(
                   onSaved: (text){
                     email = text!;
+                    return null;
                   },
                   placeholder: "e.g johndoe@gmail.com",
                   autoValidate: _autoValidate,
@@ -154,6 +161,7 @@ class _FirstContentState extends State<FirstContent>{
                     }else if(!emailRegExp.hasMatch(text)){
                       return "Invalid Email Address";
                     }
+                    return null;
                   },
                   inputType: TextInputType.emailAddress,
                   formKey: _formKey
@@ -162,6 +170,7 @@ class _FirstContentState extends State<FirstContent>{
               InputField(
                   onSaved: (text){
                     password = encrypter.encrypt(text!,iv:iv);
+                    return null;
                   },
                   autoValidate: _autoValidate,
                   label: "Password",
@@ -169,6 +178,7 @@ class _FirstContentState extends State<FirstContent>{
                     if(text!.isEmpty){
                       return "Required field";
                     }
+                    return null;
                   },
                   inputType: TextInputType.visiblePassword,
                   formKey: _formKey

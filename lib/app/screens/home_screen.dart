@@ -258,15 +258,8 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 36,),
-          Text(
-            'Upcoming Events Near You',
-            style: GoogleFonts.montserrat(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Helper.hexToColor('#545456')
-            ),
-          ),
-          const SizedBox(height: 18,),
+
+
           EventList(events: _availableEvents),
         ],
       );

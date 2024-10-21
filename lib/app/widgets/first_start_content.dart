@@ -9,6 +9,7 @@ class FirstStartContent extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     double height = MediaQuery.of(context).size.height;
+    print(height);
     return Column(
       children: [
         Text(
@@ -27,7 +28,8 @@ class FirstStartContent extends StatelessWidget{
               fontWeight: FontWeight.w400
           ),
         ),
-        SizedBox(height: height * 0.27,),
+        if(height < 1000)
+          SizedBox(height: height * 0.35,),
         // const Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,

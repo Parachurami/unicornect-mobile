@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:unicornect/app/providers/scroll_message_provider.dart';
 import 'package:unicornect/app/screens/home_screen.dart';
 import 'package:unicornect/app/screens/profile_screen.dart';

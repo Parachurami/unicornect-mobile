@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:unicornect/app/helper/helper.dart';
 import 'package:unicornect/app/screens/profile_screen.dart';
 import 'package:unicornect/app/widgets/tweak/contact_support.dart';
+import 'package:unicornect/app/widgets/tweak/faq.dart';
 import 'package:unicornect/app/widgets/tweak/following.dart';
 import 'package:unicornect/app/widgets/tweak/font.dart';
 import 'package:unicornect/app/widgets/tweak/language.dart';
 import 'package:unicornect/app/widgets/tweak/personal.dart';
+import 'package:unicornect/app/widgets/tweak/privacy_policy.dart';
+import 'package:unicornect/app/widgets/tweak/terms_and_conditions.dart';
 
 class TweakScreen extends StatelessWidget{
   const TweakScreen({super.key, required this.tweak});
@@ -133,14 +136,83 @@ class TweakScreen extends StatelessWidget{
       case Tweak.faq:
         // TODO: Handle this case.
         title = "FAQ's";
+        content = const Faq();
+        navInfo = Row(
+          children: [
+            Image.asset(
+              'assets/images/profile_icon_fill.png',
+              color: Helper.hexToColor('#7C7C80'),
+              width: 18,
+            ),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+            const Text("FAQ'S"),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+          ],
+        );
         break;
       case Tweak.privacy:
         // TODO: Handle this case.
         title = "Privacy Policy";
+        content = const PrivacyPolicy();
+        navInfo = Row(
+          children: [
+            Image.asset(
+              'assets/images/profile_icon_fill.png',
+              color: Helper.hexToColor('#7C7C80'),
+              width: 18,
+            ),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+            const Text('Privacy Policy'),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+          ],
+        );
         break;
       case Tweak.terms:
         // TODO: Handle this case.
         title = "Terms and Conditions";
+        content = const TermsAndConditions();
+        navInfo = Row(
+          children: [
+            Image.asset(
+              'assets/images/profile_icon_fill.png',
+              color: Helper.hexToColor('#7C7C80'),
+              width: 18,
+            ),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+            const Text('Terms & Conditions'),
+            const SizedBox(width: 3,),
+            Icon(
+              Icons.chevron_right_rounded,
+              color: Helper.hexToColor('#7C7C80'),
+              size: 20,
+            ),
+          ],
+        );
         break;
       case Tweak.text:
         // TODO: Handle this case.

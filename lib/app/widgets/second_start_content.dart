@@ -29,7 +29,8 @@ class SecondStartContent extends StatelessWidget{
             ),
           ),
         ),
-        SizedBox(height: height * 0.27,),
+        if(height < 1000)
+          SizedBox(height: height * 0.315,),
         // const Spacer(),
         Row(
           children: [

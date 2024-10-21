@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toastification/toastification.dart';
 import 'package:unicornect/app/helper/helper.dart';
 import 'package:unicornect/app/models/event.dart';
 import 'package:unicornect/app/providers/bookmark_provider.dart';
+import 'package:unicornect/app/providers/scroll_message_provider.dart';
+import 'package:unicornect/app/screens/event_detail.dart';
+import 'package:unicornect/app/widgets/home/event_card.dart';
 import 'package:unicornect/app/widgets/home/event_date_time_detail.dart';
 
 class EventList extends ConsumerStatefulWidget{
@@ -15,7 +19,23 @@ class EventList extends ConsumerStatefulWidget{
 }
 
 class _EventListState extends ConsumerState<EventList> {
+  late ScrollController _scrollController;
 
+  void onScroll() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      ref.read(scrollMessageProvider.notifier).updateMessenger(true);
+      return;
+    }
+    ref.read(scrollMessageProvider.notifier).updateMessenger(false);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _scrollController = ScrollController();
+    _scrollController.addListener(onScroll);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context){
     final List<Event> popularEvents = widget.events.where(
@@ -38,185 +58,32 @@ class _EventListState extends ConsumerState<EventList> {
     double height = MediaQuery.of(context).size.height;
 
     return SizedBox(
-            height: height * 0.65,
+            height: height * 0.8,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  Text(
+                    'Upcoming Events Near You',
+                    style: GoogleFonts.montserrat(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Helper.hexToColor('#545456')
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
                   ListView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.only(bottom: 0),
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: upcomingEvents.length,
                     itemBuilder: (context, index) {
-                      return SizedBox(
-                        height: 420,
-                        width: double.infinity,
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 258,
-                                  width: double.infinity,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16)
-                                  ),
-                                  child: Image.asset(
-                                    upcomingEvents[index].image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 18,
-                                  left: 12,
-                                  child: Container(
-                                    // width: 282,
-                                    height: 43,
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    decoration: BoxDecoration(
-                                      color: Helper.hexToColor('#D9D9D9').withOpacity(0.7),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on_outlined,
-                                          color: Helper.hexToColor('#242426'),
-                                        ),
-                                        const SizedBox(width: 8,),
-                                        Text(
-                                          'Bells University of Technology',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 12,),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 310,
-                                      child: Text(
-                                        upcomingEvents[index].title,
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500
-                                        ),
-                                      ),
-                                    ),
-                                    IconButton(
-                                        onPressed: (){
-                                          if(bookmarkProv.isBookmarked(upcomingEvents[index])){
-                                            setState(() {
-                                              bookmarkProv.removeFromBookMark(upcomingEvents[index]);
-                                            });
-                                          }else{
-                                            setState(() {
-                                              bookmarkProv.addToBookmark(upcomingEvents[index]);
-                                            });
-                                          }
-                                          print(bookmarkProv.isBookmarked(upcomingEvents[index]));
-                                        },
-                                        icon: Icon(bookmarkProv.isBookmarked(upcomingEvents[index]) ? Icons.bookmark : Icons.bookmark_border_rounded)
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 12,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    EventDateTimeDetail(icon: Icons.calendar_today_outlined, title: upcomingEvents[index].getFormattedDate),
-                                    const SizedBox(width: 24,),
-                                    EventDateTimeDetail(icon: Icons.access_time, title: upcomingEvents[index].getFormattedTime(context))
-                                  ],
-                                ),
-                                const SizedBox(height: 12,),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 32,
-                                      width: 90,
-                                      child: Stack(
-                                        children: [
-                                          // const SizedBox(width: 50,),
-                                          Positioned(
-                                            left: 0,
-                                            child: Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                upcomingEvents[index].attendants[0].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 18,
-                                            child: Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                upcomingEvents[index].attendants[1].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 36,
-                                            child:  Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                upcomingEvents[index].attendants[2].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '+${upcomingEvents[index].attendants.length - 3} others',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      );
+                      return EventCard(upcomingEvents[index]);
                     },
                   ),
+                  const SizedBox(height: 10,),
                   Text(
                     'Most Popular Events',
                     style: GoogleFonts.montserrat(
@@ -230,173 +97,7 @@ class _EventListState extends ConsumerState<EventList> {
                     shrinkWrap: true,
                     itemCount: popularEvents.length,
                     itemBuilder: (context, index) {
-                      return SizedBox(
-                        height: 460,
-                        width: double.infinity,
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 258,
-                                  width: double.infinity,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16)
-                                  ),
-                                  child: Image.asset(
-                                    popularEvents[index].image,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                  top: 18,
-                                  left: 12,
-                                  child: Container(
-                                    // width: 282,
-                                    height: 43,
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    decoration: BoxDecoration(
-                                      color: Helper.hexToColor('#D9D9D9').withOpacity(0.7),
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on_outlined,
-                                          color: Helper.hexToColor('#242426'),
-                                        ),
-                                        const SizedBox(width: 8,),
-                                        Text(
-                                          'Bells University of Technology',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 12,),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 310,
-                                      child: Text(
-                                        popularEvents[index].title,
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500
-                                        ),
-                                      ),
-                                    ),
-                                    IconButton(
-                                        onPressed: (){
-                                          if(bookmarkProv.isBookmarked(popularEvents[index])){
-                                            setState(() {
-                                              bookmarkProv.removeFromBookMark(popularEvents[index]);
-                                            });
-                                          }else{
-                                            setState(() {
-                                              bookmarkProv.addToBookmark(popularEvents[index]);
-                                            });
-                                          }
-                                          print(bookmarkProv.isBookmarked(popularEvents[index]));
-                                        },
-                                        icon: Icon(bookmarkProv.isBookmarked(popularEvents[index]) ? Icons.bookmark : Icons.bookmark_border_rounded)
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(height: 12,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    EventDateTimeDetail(icon: Icons.calendar_today_outlined, title: popularEvents[index].getFormattedDate),
-                                    const SizedBox(width: 24,),
-                                    EventDateTimeDetail(icon: Icons.access_time, title: popularEvents[index].getFormattedTime(context))
-                                  ],
-                                ),
-                                const SizedBox(height: 12,),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 32,
-                                      width: 90,
-                                      child: Stack(
-                                        children: [
-                                          // const SizedBox(width: 50,),
-                                          Positioned(
-                                            left: 0,
-                                            child: Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                popularEvents[index].attendants[0].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 18,
-                                            child: Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                popularEvents[index].attendants[1].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 36,
-                                            child:  Container(
-                                              clipBehavior: Clip.hardEdge,
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(100)
-                                              ),
-                                              child: Image.asset(
-                                                popularEvents[index].attendants[2].profileImage,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '+${popularEvents[index].attendants.length - 3} others',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      );
+                      return EventCard(upcomingEvents[index]);
                     },
                   ),
                 ],

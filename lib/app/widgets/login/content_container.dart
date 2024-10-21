@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:unicornect/app/models/User.dart';
 import 'package:unicornect/app/widgets/login/login_input.dart';
 import 'package:unicornect/app/widgets/login/verifier.dart';

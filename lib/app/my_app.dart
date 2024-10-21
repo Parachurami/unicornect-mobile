@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:toast/toast.dart';
-import 'package:unicornect/app/screens/sign_in_screen.dart';
 import 'package:unicornect/app/screens/onboarding.dart';
 
 class MyApp extends StatelessWidget{

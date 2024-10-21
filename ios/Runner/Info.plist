@@ -4,6 +4,14 @@
 	<dict>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+            <string>Pick your image.</string>
+            <key>NSCameraUsageDescription</key>
+            <string>Take your image.</string>
+            <key>NSMicrophoneUsageDescription</key>
+            <string>Take your image.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Get you current location</string>
 		<key>CFBundleDisplayName</key>
 		<string>Unicornect</string>
 		<key>CFBundleExecutable</key>

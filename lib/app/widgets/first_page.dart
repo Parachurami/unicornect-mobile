@@ -65,7 +65,7 @@ class _FirstPageState extends ConsumerState<FirstPage> with TickerProviderStateM
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 360,
+            height: 391,
             width: double.infinity,
             clipBehavior: Clip.hardEdge,
             // width: double.infinity,
@@ -88,7 +88,7 @@ class _FirstPageState extends ConsumerState<FirstPage> with TickerProviderStateM
                             foregroundColor: Colors.white
                         ),
                         onPressed: (){
-                          // ref.watch(newUserProvider.notifier).addNewUser();
+                          ref.read(newUserProvider.notifier).addNewUser();
                         },
                         child: Text(
                           "Skip",
@@ -152,7 +152,7 @@ class _FirstPageState extends ConsumerState<FirstPage> with TickerProviderStateM
               });
             },
             onNextPressed: (){
-              ref.watch(newUserProvider.notifier).addNewUser();
+              ref.read(newUserProvider.notifier).addNewUser();
             },
           )
         ],

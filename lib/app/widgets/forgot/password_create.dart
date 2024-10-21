@@ -60,6 +60,7 @@ class _PasswordCreateState extends State<PasswordCreate> {
                       if(text!.isEmpty){
                         return 'This field in required';
                       }
+                      return null;
                     },
                     inputType: TextInputType.visiblePassword
                 ),
@@ -72,9 +73,10 @@ class _PasswordCreateState extends State<PasswordCreate> {
                       if(text!.isEmpty){
                         return 'This field in required';
                       }
-                      if(text! != _passwordController.text){
+                      if(text != _passwordController.text){
                         return "Both password don't match";
                       }
+                      return null;
                     },
                     inputType: TextInputType.visiblePassword
                 ),

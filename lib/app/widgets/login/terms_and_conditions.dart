@@ -15,6 +15,7 @@ class ThirdContent extends StatefulWidget{
 class _ThirdContentState extends State<ThirdContent> {
   @override
   bool? checkValue= false;
+  @override
   Widget build(BuildContext context) {
     double deviceHeigth = MediaQuery.of(context).size.height;
     return Column(

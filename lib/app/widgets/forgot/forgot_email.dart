@@ -62,9 +62,10 @@ class _ForgotEmailState extends State<ForgotEmail> {
                   if(text!.trim().isEmpty){
                     return 'Please enter an email address';
                   }
-                  if(!Helper.validEmail(text!)){
+                  if(!Helper.validEmail(text)){
                     return 'Invalid email address';
                   }
+                  return null;
                 },
                 inputType: TextInputType.emailAddress
             ),
